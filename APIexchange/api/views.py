@@ -6,14 +6,32 @@ from rest_framework.parsers import JSONParser
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.views import APIView
 
+# CLASS BASED VIEW
 
+class ArticleList(APIView):
+
+    def get(self, request):
+        articles = Article.objects.all()
+        serializer = ArticleSerializer(articles, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = ArticleSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+# FUNCTION BASED API VIEWS
+'''
 @api_view(['GET', 'POST'])
 def article_list(request):
 
     if request.method == 'GET':
         articles = Article.objects.all()
-        serializer = ArticleSerializer(article, many=True)
+        serializer = ArticleSerializer(articles, many=True)
         return Response(serializer.data)
 
     if request.method == 'POST':
@@ -24,25 +42,26 @@ def article_list(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-def article_details(request, id):
+@api_view(['GET', 'PUT', 'DELETE'])
+def article_details(request, pk):
     try:
-        article = Articles.objects.get(pk=pk)
+        article = Article.objects.get(pk=pk)
     except Article.DoesNotExist:
-        return HttpResponse(status=404)
+        return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
         serializer = ArticleSerializer(article)
-        return JsonResponse(serializer.data)
+        return Response(serializer.data)
 
     elif request.method == 'PUT':
-        data.JSONParser().parse(request)
-        serializer = ArticleSerializer(article, data=data)
+        serializer = ArticleSerializer(article, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse(serializer.data)
-        return JsonResponse(serializer.errors, status=400)
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_201_CREATED)
 
     elif request.method == 'DELETE':
         article.delete()
-        return HttpResponse(status=204)
+        return Response(status=status.HTTP_204_NO_CONTENT)
+'''
 

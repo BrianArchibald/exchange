@@ -15,7 +15,7 @@ from .models import Article
 #         instance.description = validated_data.get('description', instance.description)
 
 #  Using ModelSerializer, it auto creates the create and update
-class ArticleSerializer(serializer.ModelSerializer):
+class ArticleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article
         fields = ['id', 'title', 'description']
