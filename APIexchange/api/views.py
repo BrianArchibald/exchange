@@ -5,12 +5,47 @@ from .serializers import ArticleSerializer
 from rest_framework.parsers import JSONParser
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, generics, mixins
 from rest_framework.views import APIView
 
 # CLASS BASED VIEW
 
+class ArticleList(generics.GenericAPIView, mixins.ListModelMixin,
+                  mixins.CreateModelMixin):
+
+    queryset = Article.objects.all()
+    serializer_class = ArticleSerializer
+
+    lookup_field = 'id'
+
+    # using list mixin
+    def get(self, request):
+        return self.list(request)
+
+    #  using create mixin
+    def post(self, request):
+        return self.create(request)
+
+
+class ArticleDetails(generics.GenericAPIView, mixins.RetrieveModelMixin,
+                     mixins.UpdateModelMixin, mixins.DestroyModelMixin):
+
+    queryset = Article.objects.all()
+    serializer_class = ArticleSerializer
+
+    def get(self, request, id):
+        return self.retrieve(request, id=id)
+
+    def put(self, request, id):
+        return self.update(request, id=id)
+
+    def delete(self, request, id):
+        return self.destroy(request, id=id)
+
+
+''' #  Before using mixins
 class ArticleList(APIView):
+
 
     def get(self, request):
         articles = Article.objects.all()
@@ -23,6 +58,7 @@ class ArticleList(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+'''
 
 
 class ArticleDetails(APIView):
