@@ -19,7 +19,7 @@ class ArticleViewSet(viewsets.ViewSet):
         return Response(serializer.data)
 
     def create(self, request):
-        serializer_class = ArticleSerializer(data=request.data, many=True)
+        serializer = ArticleSerializer(data=request.data, many=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -30,6 +30,20 @@ class ArticleViewSet(viewsets.ViewSet):
         article = get_object_or_404(queryset, pk=pk)
         serializer = ArticleSerializer(article)
         return Response(serializer.data)
+
+    def update(self, request, pk=None):
+        article = Article.object.get(pk=pk)
+        serializer = ArticleSerializer(article,  data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def destroy(self, request, pk=None):
+        article = Article.object.get(pk=pk)
+        article.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
 
 
 # CLASS BASED VIEW
