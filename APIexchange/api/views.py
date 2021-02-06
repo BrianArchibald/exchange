@@ -1,7 +1,7 @@
 from .models import Article
 from django.shortcuts import render, HttpResponse
 from django.http import JsonResponse
-from .serializers import ArticleSerializer
+from .serializers import ArticleSerializer, UserSerializer
 from rest_framework.parsers import JSONParser
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -9,6 +9,7 @@ from rest_framework import status, generics, mixins
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import viewsets
+from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from rest_framework.authentication import TokenAuthentication
 
@@ -23,6 +24,11 @@ class ArticleViewSet(viewsets.ModelViewSet):
     serializer_class = ArticleSerializer
     authentication_classes = (TokenAuthentication,)
 
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    pass
 
 
 # #  Generic viewsets
@@ -62,7 +68,7 @@ class ArticleViewSet(viewsets.ModelViewSet):
 
 
 # CLASS BASED VIEW
-
+'''
 class ArticleList(generics.GenericAPIView, mixins.ListModelMixin,
                   mixins.CreateModelMixin):
 
@@ -96,7 +102,7 @@ class ArticleDetails(generics.GenericAPIView, mixins.RetrieveModelMixin,
         return self.destroy(request, id=id)
 
 
-''' #  Before using mixins
+ #  Before using mixins
 class ArticleList(APIView):
 
 
@@ -111,7 +117,7 @@ class ArticleList(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-'''
+
 
 
 class ArticleDetails(APIView):
@@ -142,7 +148,7 @@ class ArticleDetails(APIView):
 
 
 # FUNCTION BASED API VIEWS
-'''
+
 @api_view(['GET', 'POST'])
 def article_list(request):
 
