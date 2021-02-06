@@ -38,8 +38,19 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
     'api',
 ]
+
+#  This is global for all viewsets
+REST_FRAMEWORK = {
+        'DEFAULT_PERMISSIION_CLASSES': [
+            # 'rest_framework.permissions.IsAuthenticated',
+            #  above will enforce it globally
+            'rest_framework.permissions.AllowAny',
+            # this will disable it above
+         ]
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
