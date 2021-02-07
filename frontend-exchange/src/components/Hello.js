@@ -1,8 +1,8 @@
 import React from 'react'
 
-function Hello() {
+function Hello(props) {
   return(
-    <h1>Inside Hello component</h1>
+    <h2>{props.name}, {props.lastname}</h2>
   )
 }
 

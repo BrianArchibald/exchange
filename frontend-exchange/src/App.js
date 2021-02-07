@@ -1,11 +1,12 @@
 import './App.css';
 import Hello from './component/Hello';
+import MyClass from './component/MyClass';
 
 function App() {
   return (
     <div className="App">
-    <h1>Yo</h1>
-    <Hello/>
+    <Hello name="Brian" lastname="Archibald"/>
+    <MyClass/>
     </div>
   );
 }
