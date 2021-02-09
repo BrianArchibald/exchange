@@ -1,9 +1,15 @@
 import React, { Component } from 'react'
 
 class MyClass extends Component {
+  clicked() {
+    alert('Button clicked')
+  }
   render() {
     return(
-      <h1>Inside Class component</h1>
+      <div>
+        <h1>Email is {this.props.email}</h1>
+        <button onClick= {this.clicked}>Click</button>
+      </div>
     )
   }
 }

@@ -1,8 +1,13 @@
 import React from 'react'
 
 function Hello(props) {
+  function ClickMe() {
+    alert('Button clicked')
+  }
   return(
-    <h2>{props.name}, {props.lastname}</h2>
+    <div>
+      <h2>{props.name}</h2>
+    </div>
   )
 }
 

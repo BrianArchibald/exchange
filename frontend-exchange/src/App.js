@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App">
     <Hello name="Brian" lastname="Archibald"/>
-    <MyClass/>
+    <MyClass email="somethiing@me.com"/>
     </div>
   );
 }
