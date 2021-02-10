@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
 
 class MyClass extends Component {
-  clicked() {
-    alert('Button clicked')
-  }
+  // clicked() {
+  //   alert('Button clicked')
+  // }
   render() {
     return(
       <div>
         <h1>Email is {this.props.email}</h1>
-        <button onClick= {this.clicked}>Click</button>
+        // below was when function was in this class
+        // <button onClick = {this.clicked}>Click</button>
+        <button onClick = {this.props.myClick}>Click</button>
       </div>
     )
   }
