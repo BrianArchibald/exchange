@@ -10,7 +10,7 @@ class MyClass extends Component {
         <h1>Email is {this.props.email}</h1>
         // below was when function was in this class
         // <button onClick = {this.clicked}>Click</button>
-        <button onClick = {this.props.myClick}>Click</button>
+        <button className="btn btn-primary" onClick = {this.props.myClick}>Click</button>
       </div>
     )
   }

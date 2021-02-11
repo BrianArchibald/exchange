@@ -1,6 +1,8 @@
 import './App.css';
 import Hello from './component/Hello';
 import MyClass from './component/MyClass';
+import Name from './component/Name';
+import Example from './component/Example';
 
 function App() {
 
@@ -9,9 +11,12 @@ function App() {
   }
 
   return (
-    <div className="App">
-    <Hello name="Brian" lastname="Archibald"/>
-    <MyClass email="somethiing@me.com" myClick = {clicked}/>
+    <div className="container">
+    // <Hello name="Brian" lastname="Archibald"/>
+    // <MyClass className="container" email="somethiing@me.com" myClick = {clicked}/>
+    <Name/>
+    <Example names = {['JS', 'Python', 'Django']}/>
+
     </div>
   );
 }

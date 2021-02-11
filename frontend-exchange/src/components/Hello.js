@@ -7,6 +7,7 @@ function Hello(props) {
   return(
     <div>
       <h2>{props.name}</h2>
+    <button className="btn btn-secondary" onClick={ClickMe}>Click</button>
     </div>
   )
 }
