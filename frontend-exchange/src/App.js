@@ -3,6 +3,7 @@ import Hello from './component/Hello';
 import MyClass from './component/MyClass';
 import Name from './component/Name';
 import Example from './component/Example';
+import Form from './component/Form';
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
     // <MyClass className="container" email="somethiing@me.com" myClick = {clicked}/>
     <Name/>
     <Example names = {['JS', 'Python', 'Django']}/>
+    <Form/>
 
     </div>
   );
